@@ -1,0 +1,31 @@
+---
+title: "Capstone Project"
+author: "Samantha Lohnes"
+date: "November 12, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Advanced Placement Exams
+
+_Will an increase in overall AP Exams contribute to an increase in test scores and graduation rates?_
+
+Every day, parents worry about their children's future. They want their children to have the best chance to be succesful. For millions of students, this means taking Advanced Placement courses and exams during high school. Parents will pick the state with the highest test scores and graduation rate in order to help their children succeed.
+
+
+
+### Data
+In order to accurately examine this problem, I will be using data from CollegeBoard, the company that distributes and grades the exams, found [here](https://research.collegeboard.org/programs/ap/data). For high school graduation rates, I will be using the data compiled [here](https://nces.ed.gov/ccd/data_tables.asp) and [here](http://www.governing.com/gov-data/high-school-graduation-rates-by-state.html).
+
+
+
+### Approach
+Since the data I've found does not break down to the individual school level, I will be examining the data on a state level. I will analyze the test scores from the past 5-10 years and see if the total number of exams increased year over year and if the scores increased as well. I will also examine the dropout/completion rates for high school by state and see if there is a correlation between them and the Advanced Placement test scores. 
+
+
+
+### Deliverables
+I hope to deliver not only the R code used to arrive at my conclusions but a paper detailing my methods and conclusions. 
