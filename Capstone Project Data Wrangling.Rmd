@@ -1,0 +1,67 @@
+---
+title: "Capstone Project Data Wrangling"
+author: "Samantha Lohnes"
+date: "11/29/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## AP Scores Data Project
+
+The data I collected from CollegeBoard's website was far from tidy. The sets of data I am using can be found [here](https://research.collegeboard.org/programs/ap/data/archived/ap-2016). The data was separated by ethnicity (for rows), with a row for each possible score (1-5) and each of the columns representing a different test subject. Each state has its own file, so I began with the one for Alabama.
+
+#### Step One: Install the needed packages
+
+I had to install dplyr, tidyr, and readr in order to properly organize and import my data. I used the Import Dataset function in RStudio to load my data set. 
+
+#### Step Two: Removing unnecessary columns and rows
+
+I removed two blank columns and eight blank rows from the data set. 
+#### Step Three: Rename Columns
+
+The column names from the original data set were imported with spaces being converted to periods. I used the following code to remedy this:
+
+```{r eval = FALSE}
+names(AL_data_ALL_2016) <- gsub(x = names(AL_data_ALL_2016), 
+                           pattern = "\\.", 
+                           replacement = " ")
+```
+
+#### Step Four: Gather Columns
+
+Next, I needed to gather all of the subject columns and convert them into observations. 
+
+```{r eval = FALSE}
+AL_data_ALL2016 <- gather(AL_data_ALL_2016, "Subject", 
+                       "Number of Exams", 4:40)
+```
+
+#### Step Five: Add State Column and Sort
+
+Because I will be dealing with multiple states data, I had to add a column with a state abbreviation for each observation. I also removed the Total Exam column as it was no longer necessary. I then sorted the data by the Ethnicity column.
+
+```{r eval = FALSE}
+AL_data_ALL_2016$State <- "AL"
+
+AL_data_ALL_2016 <- AL_data_ALL_2016[,-3]
+
+AL_data_ALL_2016 <- AL_data_ALL_2016[order(AL_data_ALL_2016$Ethnicity),]
+
+```
+
+#### Step Six: Converting Columns and Replacing Missing Values
+
+Finally, I converted the Number of Exams column to be numeric and replaced all missing values with zeros. I also renamed the AP SCORE column.
+
+```{r eval = FALSE}
+AL_data_ALL_2016$`Number of Exams` <- as.numeric(AL_data_ALL_2016$`Number of Exams`)
+
+AL_data_ALL_2016$`Number of Exams`[is.na(AL_data_ALL_2016$`Number of Exams`)] <- 0
+
+AL_data_ALL_2016 <- rename(AL_data_ALL_2016, Score = "AP SCORE")
+```
+
+I will have to repeat all of these steps for each state for the years 2012-2016. 
